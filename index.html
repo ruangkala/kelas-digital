@@ -27,7 +27,7 @@
             <span class="text-xl font-extrabold tracking-tight">EduLearn</span>
           </div>
           <h2 class="text-3xl font-extrabold mb-3 leading-tight">Selamat Datang!</h2>
-          <p class="text-sm text-sky-100 leading-relaxed">Portal pembelajaran digital terintegrasi materi Teks Anekdot, kuis interaktif, dan pengumpulan tugas terpusat.</p>
+          <p class="text-sm text-sky-100 leading-relaxed">Portal pembelajaran digital terintegrasi materi Teks Anekdot, kuis interaktif otomatis, dan pengumpulan tugas terpusat.</p>
         </div>
         <div class="mt-8 text-xs text-sky-200/80">&copy; 2026 EduLearn Workspace System</div>
       </div>
@@ -39,19 +39,19 @@
         <form id="loginForm" class="space-y-4">
           <div>
             <label class="block text-xs font-bold text-slate-600 mb-1">Nama Lengkap</label>
-            <input type="text" id="authName" value="Nama Lengkapmu" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
+            <input type="text" id="authName" placeholder="" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-slate-600 mb-1">Nomor Absen</label>
-              <input type="text" id="authAbsen" value="Nomor Absenmu" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
+              <input type="text" id="authAbsen" placeholder="" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-600 mb-1">Pilihan Kelas</label>
               <select id="authClass" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium">
-                <option value="X">X</option>
-                <option value="XI">XI</option>
-                <option value="XII">XII</option>
+                <option value="X">Kelas X</option>
+                <option value="XI">Kelas XI</option>
+                <option value="XII">Kelas XII</option>
               </select>
             </div>
           </div>
@@ -104,7 +104,7 @@
           <div class="w-10 h-10 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm shrink-0" id="userAvatar">AF</div>
           <div class="overflow-hidden">
             <h4 class="text-xs font-bold text-slate-900 truncate" id="sideUserName">Ahmad Fauzi</h4>
-            <p class="text-[10px] text-slate-500 truncate" id="sideUserClass">Kelas: XI-RPL 1 | Absen: 05</p>
+            <p class="text-[10px] text-slate-500 truncate" id="sideUserClass">Kelas: XI | Absen: 05</p>
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@
         <div class="flex items-center gap-4">
           <div class="text-right">
             <div class="text-xs font-bold text-slate-900" id="topUserName">Ahmad Fauzi</div>
-            <div class="text-[10px] text-teal-600 font-semibold" id="topUserClass">XI-RPL 1 (05)</div>
+            <div class="text-[10px] text-teal-600 font-semibold" id="topUserClass">XI (05)</div>
           </div>
         </div>
       </header>
@@ -132,7 +132,7 @@
               <p class="text-xs text-sky-100">Lanjutkan modul pembelajaran Teks Anekdot hari ini.</p>
             </div>
             <div class="bg-white/20 backdrop-blur-md px-4 py-2 rounded-2xl text-xs font-bold border border-white/20 student-meta">
-              Kelas: XI-RPL 1 | Absen: 05
+              Kelas: XI | Absen: 05
             </div>
           </div>
 
@@ -167,9 +167,9 @@
             <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
               <div>
                 <h3 class="font-bold text-slate-900 text-base mb-1">Latihan Soal & Kuis</h3>
-                <p class="text-xs text-slate-500 mb-4">10 Butir soal pilihan ganda otomatis terhubung dari spreadsheet pengajar.</p>
+                <p class="text-xs text-slate-500 mb-4">Butir soal pilihan ganda otomatis terhubung dari spreadsheet pengajar.</p>
                 <div class="text-xs font-bold text-slate-700 bg-slate-100 p-3 rounded-xl mb-4">
-                  ⏱️ Durasi: 45 Menit | Auto-Koreksi
+                  ⏱️ Durasi: 45 Menit | Auto-Koreksi & Nilai Tersimpan
                 </div>
               </div>
               <button onclick="switchTab('soal')" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition">
@@ -199,7 +199,6 @@
               </div>
             </div>
 
-            <!-- Isi Materi Lengkap -->
             <div class="lg:col-span-2 bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
                 <div>
@@ -212,7 +211,6 @@
               </div>
 
               <div class="space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
-                <!-- 1. Pengertian -->
                 <div class="space-y-2">
                   <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-teal-500"></span> 1. Pengertian Teks Anekdot
@@ -223,7 +221,6 @@
                   </div>
                 </div>
 
-                <!-- 2. Ciri-Ciri -->
                 <div class="space-y-3">
                   <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-teal-500"></span> 2. Ciri-Ciri Teks Anekdot
@@ -236,7 +233,6 @@
                   </div>
                 </div>
 
-                <!-- 3. Struktur -->
                 <div class="space-y-3">
                   <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-teal-500"></span> 3. Struktur Teks Anekdot
@@ -253,7 +249,6 @@
                   </div>
                 </div>
 
-                <!-- 4. Kaidah Kebahasaan -->
                 <div class="space-y-3">
                   <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-teal-500"></span> 4. Kaidah Kebahasaan
@@ -294,7 +289,7 @@
               <h2 class="text-xl font-bold">Absensi & Kehadiran</h2>
               <p class="text-xs text-sky-100">Data otomatis tersinkronisasi ke Google Sheets pengajar</p>
             </div>
-            <div class="text-xs font-bold bg-white/20 px-3 py-1.5 rounded-xl student-meta">Kelas: XI-RPL 1 | Absen: 05</div>
+            <div class="text-xs font-bold bg-white/20 px-3 py-1.5 rounded-xl student-meta">Kelas: XI | Absen: 05</div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
@@ -404,7 +399,7 @@
               <h2 class="text-xl font-bold">Pengumpulan Tugas Online</h2>
               <p class="text-xs text-sky-100">File otomatis tersimpan di folder Google Drive pengajar</p>
             </div>
-            <div class="text-xs font-bold bg-white/20 px-3 py-1.5 rounded-xl student-meta">Kelas: XI-RPL 1 | Absen: 05</div>
+            <div class="text-xs font-bold bg-white/20 px-3 py-1.5 rounded-xl student-meta">Kelas: XI | Absen: 05</div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -464,11 +459,11 @@
 
   <script>
     // ==========================================
-    // TEMPELKAN URL APPS SCRIPT ANDA DI BAWAH INI
+    // URL GOOGLE APPS SCRIPT ANDA
     // ==========================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9NauiCbomrDS0kqDEEm30rH7ygdOBKvfeSZsrPsiXw7XTGr1CjXQSrTJgs7Wd-NVO/exec";
 
-    let currentUser = { name: "Ahmad Fauzi", absen: "05", kelas: "XI-RPL 1" };
+    let currentUser = { name: "Ahmad Fauzi", absen: "05", kelas: "XI" };
     let bankSoal = [];
     let currentSoalIdx = 0;
     let jawabanSiswa = {};
@@ -525,19 +520,17 @@
       const jamStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + " WIB";
 
       try {
-        if (!SCRIPT_URL.includes("TEMPEL_URL")) {
-          await fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              action: "absen",
-              nama: currentUser.name,
-              kelas: currentUser.kelas,
-              absen: currentUser.absen
-            })
-          });
-        }
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "absen",
+            nama: currentUser.name,
+            kelas: currentUser.kelas,
+            absen: currentUser.absen
+          })
+        });
 
         document.getElementById("dashAbsenStatus").className = "inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-4";
         document.getElementById("dashAbsenStatus").innerText = `✅ Hadir (${jamStr})`;
@@ -561,16 +554,6 @@
 
     // 4. Memuat Soal & Materi dari Google Sheets
     async function loadDataFromSheet() {
-      if (SCRIPT_URL.includes("TEMPEL_URL")) {
-        // Fallback default
-        bankSoal = [
-          { id: 1, pertanyaan: "Manakah tujuan utama teks anekdot yang membedakannya dengan teks humor biasa?", opsi: { A: "Hanya menghibur pembaca", B: "Menyampaikan kritik sosial halus", C: "Menceritakan fiksi ilmiah", D: "Memberi instruksi kerja" }, kunci: "B" },
-          { id: 2, pertanyaan: "Bagian struktur yang memuat puncak konflik atau kejanggalan adalah...", opsi: { A: "Orientasi", B: "Krisis", C: "Koda", D: "Abstrak" }, kunci: "B" }
-        ];
-        renderQuiz();
-        return;
-      }
-
       try {
         const res = await fetch(SCRIPT_URL);
         const data = await res.json();
@@ -593,6 +576,14 @@
         }
       } catch (err) {
         console.error("Gagal memuat data dari spreadsheet", err);
+        // Fallback cadangan jika request jaringan gagal
+        bankSoal = [
+          { id: 1, pertanyaan: "Manakah tujuan utama teks anekdot yang membedakannya dengan teks humor biasa?", opsi: { A: "Hanya menghibur pembaca tanpa maksud tertentu", B: "Menyampaikan kritik sosial atau sindiran secara halus", C: "Menceritakan kisah fiksi masa depan", D: "Memberikan instruksi langkah kerja" }, kunci: "B" },
+          { id: 2, pertanyaan: "Bagian struktur teks anekdot yang berisi pengenalan tokoh, latar belakang, dan situasi adalah...", opsi: { A: "Abstrak", B: "Reaksi", C: "Orientasi", D: "Krisis" }, kunci: "C" },
+          { id: 3, pertanyaan: "Bagian pada teks anekdot yang memuat puncak konflik atau kejanggalan utama adalah...", opsi: { A: "Orientasi", B: "Krisis", C: "Koda", D: "Abstrak" }, kunci: "B" },
+          { id: 4, pertanyaan: "Tanggapan atau tindakan tokoh dalam merespons krisis yang sering menghadirkan tawa adalah...", opsi: { A: "Orientasi", B: "Reaksi", C: "Abstrak", D: "Evaluasi" }, kunci: "B" },
+          { id: 5, pertanyaan: "Bagian penutup teks anekdot yang berisi kesimpulan atau pesan moral opsional adalah...", opsi: { A: "Koda", B: "Krisis", C: "Orientasi", D: "Reaksi" }, kunci: "A" }
+        ];
         renderQuiz();
       }
     }
@@ -606,7 +597,7 @@
       bankSoal.forEach((_, idx) => {
         const b = document.createElement("button");
         b.id = `pal-${idx}`;
-        b.className = "w-8 h-8 rounded-lg text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700";
+        b.className = "w-8 h-8 rounded-lg text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 transition";
         b.innerText = idx + 1;
         b.onclick = () => { currentSoalIdx = idx; tampilkanSoal(idx); };
         palette.appendChild(b);
@@ -630,23 +621,84 @@
         row.innerHTML = `<span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black border ${isChoosen ? 'bg-teal-600 text-white border-teal-600' : 'border-slate-300 text-slate-400'}">${letter}</span> <span class="text-xs sm:text-sm">${q.opsi[letter]}</span>`;
         row.onclick = () => {
           jawabanSiswa[idx] = letter;
-          document.getElementById(`pal-${idx}`).className = "w-8 h-8 rounded-lg text-xs font-bold bg-teal-600 text-white";
+          const palBtn = document.getElementById(`pal-${idx}`);
+          if (palBtn) {
+            palBtn.className = "w-8 h-8 rounded-lg text-xs font-bold bg-teal-600 text-white border-teal-600";
+          }
           tampilkanSoal(idx);
         };
         ops.appendChild(row);
       });
 
       document.getElementById("btnSoalPrev").disabled = idx === 0;
-      document.getElementById("btnSoalNext").innerText = idx === bankSoal.length - 1 ? "Selesai Kuis" : "Selanjutnya →";
+      document.getElementById("btnSoalNext").innerText = idx === bankSoal.length - 1 ? "Selesai & Kumpulkan Kuis" : "Selanjutnya →";
     }
 
-    function stepSoal(direction) {
+    async function stepSoal(direction) {
       const target = currentSoalIdx + direction;
       if (target >= 0 && target < bankSoal.length) {
         currentSoalIdx = target;
         tampilkanSoal(target);
       } else if (target === bankSoal.length) {
-        alert("Kuis berhasil diselesaikan!");
+        const konfirmasi = confirm("Apakah Anda yakin ingin menyelesaikan kuis dan mengirimkan jawaban?");
+        if (!konfirmasi) return;
+
+        // Hitung skor
+        let benar = 0;
+        bankSoal.forEach((q, idx) => {
+          if (jawabanSiswa[idx] && jawabanSiswa[idx] === q.kunci) {
+            benar++;
+          }
+        });
+
+        const totalSoal = bankSoal.length;
+        const skorAkhir = Math.round((benar / totalSoal) * 100);
+
+        const btnNext = document.getElementById("btnSoalNext");
+        btnNext.disabled = true;
+        btnNext.innerText = "Menyimpan Nilai...";
+
+        // Kirim nilai kuis ke Google Sheets
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "kuis",
+              nama: currentUser.name,
+              kelas: currentUser.kelas,
+              absen: currentUser.absen,
+              benar: benar,
+              totalSoal: totalSoal,
+              skor: skorAkhir
+            })
+          });
+
+          // Tampilkan hasil nilai di layar
+          document.getElementById("quizBox").innerHTML = `
+            <div class="text-center py-8 space-y-4">
+              <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl font-bold">
+                🎉
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">Kuis Selesai!</h3>
+              <p class="text-xs text-slate-500">Nilai Anda telah otomatis tersimpan ke Google Sheets pengajar.</p>
+              
+              <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl max-w-xs mx-auto space-y-2">
+                <div class="text-3xl font-black text-teal-600">${skorAkhir} <span class="text-xs text-slate-400 font-normal">/ 100</span></div>
+                <div class="text-xs text-slate-600 font-semibold">Benar: ${benar} dari ${totalSoal} Soal</div>
+              </div>
+
+              <button onclick="switchTab('dashboard')" class="mt-4 px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition">
+                Kembali ke Dashboard
+              </button>
+            </div>
+          `;
+        } catch (err) {
+          alert("Gagal mencatat nilai kuis. Pastikan koneksi internet aktif.");
+          btnNext.disabled = false;
+          btnNext.innerText = "Selesai & Kumpulkan Kuis";
+        }
       }
     }
 
