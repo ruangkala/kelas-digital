@@ -39,19 +39,19 @@
         <form id="loginForm" class="space-y-4">
           <div>
             <label class="block text-xs font-bold text-slate-600 mb-1">Nama Lengkap</label>
-            <input type="text" id="authName" value="Ahmad Fauzi" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
+            <input type="text" id="authName" value="Nama Lengkapmu" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-slate-600 mb-1">Nomor Absen</label>
-              <input type="text" id="authAbsen" value="05" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
+              <input type="text" id="authAbsen" value="Nomor Absenmu" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium" />
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-600 mb-1">Pilihan Kelas</label>
               <select id="authClass" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium">
-                <option value="XI-RPL 1">XI-RPL 1</option>
-                <option value="XI-RPL 2">XI-RPL 2</option>
-                <option value="X-Bahasa">X-Bahasa</option>
+                <option value="X">X</option>
+                <option value="XI">XI</option>
+                <option value="XII">XII</option>
               </select>
             </div>
           </div>
