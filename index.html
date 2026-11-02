@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -69,7 +69,7 @@
     <!-- Mobile Backdrop -->
     <div id="mobileMenuBackdrop" onclick="toggleMobileMenu()" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 md:hidden transition-opacity"></div>
 
-    <!-- Sidebar Drawer -->
+    <!-- Sidebar Drawer (Responsive HP & Desktop) -->
     <aside id="mainSidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200/80 flex flex-col shrink-0 transform -translate-x-full md:translate-x-0 md:static md:w-64 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
       <div class="h-20 px-6 flex items-center justify-between border-b border-slate-100">
         <div class="flex items-center gap-3">
@@ -221,7 +221,11 @@
             <div class="lg:col-span-2 bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
                 <div>
-                  <span class="text-xs font-bold text-teal-600 uppercase tracking-wider" id="matActiveBabLabel">Membaca Materi</span>
+                  <div id="matActiveBabLabel" class="mb-1">
+                    <span class="inline-flex items-center gap-1.5 font-black text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full text-xs">
+                      Membaca Materi
+                    </span>
+                  </div>
                   <h3 class="text-xl font-bold text-slate-900 mt-0.5" id="matMainJudul">Pilih Bab Materi</h3>
                 </div>
                 <a id="btnDownloadPDF" href="#" target="_blank" class="hidden inline-flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl transition shadow-sm">
@@ -264,7 +268,9 @@
               
               <div class="pt-2 border-t border-slate-100 space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="text-[10px] font-bold text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200" id="currentVideoTag">Sedang Diputar</span>
+                  <span class="inline-flex items-center gap-1.5 text-xs font-black text-sky-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-300 shadow-sm" id="currentVideoTag">
+                    Sedang Diputar
+                  </span>
                   <a id="btnBukaLinkAsli" href="#" target="_blank" class="text-xs font-bold text-sky-600 hover:text-sky-700 inline-flex items-center gap-1">
                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Tonton di Aplikasi
                   </a>
@@ -358,40 +364,48 @@
           </div>
         </section>
 
-        <!-- TAB TUGAS (KANBAN) -->
+        <!-- TAB TUGAS (KANBAN DINAMIS DARI SPREADSHEET) -->
         <section id="tab-tugas" class="tab-content hidden space-y-6">
-          <div class="p-6 rounded-3xl bg-gradient-to-r from-sky-600 to-teal-600 text-white shadow-lg">
-            <h2 class="text-xl font-bold">Daftar Status Tugas</h2>
-            <p class="text-xs text-sky-100">Pantau tugas mandiri Anda</p>
+          <div class="p-6 rounded-3xl bg-gradient-to-r from-sky-600 to-teal-600 text-white shadow-lg flex justify-between items-center">
+            <div>
+              <h2 class="text-xl font-bold">Daftar Status Tugas (Kanban)</h2>
+              <p class="text-xs text-sky-100">Pantau progres pengerjaan seluruh tugas dari pengajar</p>
+            </div>
+            <span class="text-xs font-bold bg-white/20 px-3.5 py-1.5 rounded-xl border border-white/20" id="totalTugasBadge">0 Tugas</span>
           </div>
+
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Kolom 1: Belum Dikerjakan -->
             <div class="space-y-3">
               <h3 class="font-bold text-sm text-slate-700 flex items-center justify-between">
                 <span>Belum Dikerjakan</span>
-                <span class="w-5 h-5 rounded-full bg-slate-200 text-[10px] flex items-center justify-center font-bold">1</span>
+                <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs flex items-center justify-center font-black" id="countBelum">0</span>
               </h3>
-              <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-2">
-                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">Wajib Sesuai Tenggat</span>
-                <h4 class="font-bold text-sm text-slate-900">Tugas 1: Analisis Struktur Anekdot</h4>
-                <p class="text-xs text-slate-500">Menganalisis bagian Orientasi, Krisis, dan Reaksi pada teks contoh.</p>
-                <button onclick="switchTab('pengumpulan')" class="w-full mt-2 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-lg transition">Kumpulkan Tugas</button>
+              <div id="kanbanBelumList" class="space-y-3">
+                <div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Memuat tugas...</div>
               </div>
             </div>
 
+            <!-- Kolom 2: Sedang Dikerjakan -->
             <div class="space-y-3">
               <h3 class="font-bold text-sm text-slate-700 flex items-center justify-between">
                 <span>Sedang Dikerjakan</span>
-                <span class="w-5 h-5 rounded-full bg-slate-200 text-[10px] flex items-center justify-center font-bold">0</span>
+                <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs flex items-center justify-center font-black" id="countProses">0</span>
               </h3>
-              <div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Tidak ada tugas aktif</div>
+              <div id="kanbanProsesList" class="space-y-3">
+                <div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Tidak ada tugas aktif</div>
+              </div>
             </div>
 
+            <!-- Kolom 3: Selesai -->
             <div class="space-y-3">
               <h3 class="font-bold text-sm text-slate-700 flex items-center justify-between">
-                <span>Selesai</span>
-                <span class="w-5 h-5 rounded-full bg-slate-200 text-[10px] flex items-center justify-center font-bold">0</span>
+                <span>Selesai (Terkumpul)</span>
+                <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-black" id="countSelesai">0</span>
               </h3>
-              <div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Belum ada tugas selesai</div>
+              <div id="kanbanSelesaiList" class="space-y-3">
+                <div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Belum ada tugas selesai</div>
+              </div>
             </div>
           </div>
         </section>
@@ -454,7 +468,7 @@
                   <p class="text-[10px] text-slate-400">Pastikan izin akses tautan diatur ke publik agar dapat diperiksa pengajar.</p>
                 </div>
 
-                <button type="submit" id="btnSubmitTugas" class="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2">
+                <button type="submit" id="btnSubmitTugas" class="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-md shadow-teal-600/20">
                   <i data-lucide="send" class="w-4 h-4"></i> Kirim Tugas Sekarang
                 </button>
               </form>
@@ -760,16 +774,19 @@
           ]);
         }
 
-        // D. Load Daftar Tugas
+        // D. Load Daftar Tugas & Render ke Papan Kanban
         if (data.daftarTugas && data.daftarTugas.length > 0) {
           updateDropdownTugas(data.daftarTugas);
+          renderKanbanTugas(data.daftarTugas, data.karyaSiswa || []);
         } else {
-          updateDropdownTugas([{
+          const fallbackTugas = [{
             id: 1,
             judul: "Tugas 1: Analisis Struktur Teks Anekdot",
             deskripsi: "Menganalisis bagian Orientasi, Krisis, dan Reaksi pada teks contoh.",
             tenggat: "2026-11-05 23:59"
-          }]);
+          }];
+          updateDropdownTugas(fallbackTugas);
+          renderKanbanTugas(fallbackTugas, data.karyaSiswa || []);
         }
 
         // E. Load Galeri Karya Siswa untuk Peer Review
@@ -782,7 +799,7 @@
       }
     }
 
-    // 5. Logika Multi-Materi (Daftar Bab & Detail Bacaan)
+    // 5. Logika Multi-Materi (Badge Interaktif & Animasi Pulse)
     function renderMateriList(list) {
       dataMateriList = list;
       const container = document.getElementById("materiListContainer");
@@ -800,21 +817,28 @@
       list.forEach((m, idx) => {
         const isCurrent = idx === materiIndexAktif;
         const card = document.createElement("div");
-        card.className = `p-4 rounded-2xl cursor-pointer border-2 transition ${
+        card.id = `materi-card-${idx}`;
+        card.className = `p-4 rounded-2xl cursor-pointer border-2 transition-all duration-200 transform hover:-translate-y-0.5 ${
           isCurrent 
-            ? 'border-teal-500 bg-teal-50/60 shadow-sm' 
-            : 'border-slate-200 hover:border-slate-300 bg-white'
+            ? 'border-teal-500 bg-teal-50/70 shadow-md shadow-teal-500/10' 
+            : 'border-slate-200 hover:border-teal-300 hover:bg-slate-50/80 bg-white'
         }`;
 
         card.innerHTML = `
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[10px] font-bold ${isCurrent ? 'text-teal-700 bg-teal-100' : 'text-slate-500 bg-slate-100'} px-2.5 py-0.5 rounded-full">
-              ${isCurrent ? 'Sedang Dibaca' : 'Bab ' + (idx + 1)}
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider transition-all duration-200 ${
+              isCurrent 
+                ? 'bg-teal-600 text-white shadow-sm ring-2 ring-teal-300' 
+                : 'bg-slate-100 text-slate-600 border border-slate-200'
+            }">
+              ${isCurrent ? '<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Sedang Dibaca' : `Bab ${idx + 1}`}
             </span>
-            <i data-lucide="${isCurrent ? 'book-open' : 'book'}" class="w-4 h-4 ${isCurrent ? 'text-teal-600' : 'text-slate-400'}"></i>
+            <div class="w-7 h-7 rounded-xl flex items-center justify-center transition-colors ${isCurrent ? 'bg-teal-100 text-teal-700' : 'bg-slate-100 text-slate-400'}">
+              <i data-lucide="${isCurrent ? 'book-open' : 'book'}" class="w-4 h-4"></i>
+            </div>
           </div>
-          <h4 class="text-sm font-bold text-slate-900 truncate">${m.bab}</h4>
-          <p class="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">${m.deskripsi}</p>
+          <h4 class="text-sm font-black text-slate-900 truncate leading-snug mt-1">${m.bab}</h4>
+          <p class="text-xs font-medium text-slate-500 line-clamp-2 mt-1 leading-relaxed">${m.deskripsi}</p>
         `;
 
         card.onclick = () => bukaMateri(idx);
@@ -830,7 +854,11 @@
       materiIndexAktif = idx;
       const item = dataMateriList[idx];
 
-      document.getElementById("matActiveBabLabel").innerText = item.bab;
+      document.getElementById("matActiveBabLabel").innerHTML = `
+        <span class="inline-flex items-center gap-1.5 font-black text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full text-xs">
+          <span class="w-2 h-2 rounded-full bg-teal-500 animate-ping"></span> Sedang Dibaca: ${item.bab}
+        </span>
+      `;
       document.getElementById("matMainJudul").innerText = item.judul;
 
       const btnPdf = document.getElementById("btnDownloadPDF");
@@ -843,27 +871,38 @@
 
       const contentBox = document.getElementById("materiContentBox");
       contentBox.innerHTML = `
-        <div class="bg-teal-50 border border-teal-200 rounded-2xl p-4 text-teal-900 text-xs sm:text-sm">
-          <strong>Ringkasan:</strong> ${item.deskripsi}
+        <div class="bg-teal-50 border border-teal-200 rounded-2xl p-4 text-teal-950 text-xs sm:text-sm shadow-sm">
+          <strong class="font-black text-teal-800">Ringkasan Materi:</strong> ${item.deskripsi}
         </div>
         <div class="space-y-4 pt-2">
-          ${item.isi || '<p class="text-slate-500">Silakan baca dokumen lengkap materi ini melalui tautan PDF di atas.</p>'}
+          ${item.isi || '<p class="text-slate-500">Silakan unduh atau baca berkas lengkap materi ini melalui tombol PDF di atas.</p>'}
         </div>
       `;
 
-      const container = document.getElementById("materiListContainer");
-      Array.from(container.children).forEach((el, i) => {
+      dataMateriList.forEach((_, i) => {
+        const el = document.getElementById(`materi-card-${i}`);
+        if (!el) return;
         if (i === idx) {
-          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-teal-500 bg-teal-50/60 shadow-sm transition";
+          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-teal-500 bg-teal-50/70 shadow-md shadow-teal-500/10 transition-all duration-200 transform -translate-y-0.5";
+          const badgeSpan = el.querySelector("span");
+          if (badgeSpan) {
+            badgeSpan.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-teal-600 text-white shadow-sm ring-2 ring-teal-300";
+            badgeSpan.innerHTML = '<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Sedang Dibaca';
+          }
         } else {
-          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-slate-200 hover:border-slate-300 bg-white transition";
+          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-slate-200 hover:border-teal-300 hover:bg-slate-50/80 bg-white transition-all duration-200";
+          const badgeSpan = el.querySelector("span");
+          if (badgeSpan) {
+            badgeSpan.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200";
+            badgeSpan.innerHTML = `Bab ${i + 1}`;
+          }
         }
       });
 
       lucide.createIcons();
     }
 
-    // 6. Logika Multi-Video Player
+    // 6. Logika Multi-Video (Badge Interaktif, Bold, & Animasi Playback)
     function formatEmbedUrl(rawUrl) {
       if (!rawUrl) return "";
       let url = rawUrl.trim();
@@ -911,21 +950,28 @@
       list.forEach((vid, idx) => {
         const isCurrent = idx === videoIndexAktif;
         const btn = document.createElement("div");
-        btn.className = `p-4 rounded-2xl cursor-pointer border-2 transition ${
+        btn.id = `video-card-${idx}`;
+        btn.className = `p-4 rounded-2xl cursor-pointer border-2 transition-all duration-200 transform hover:-translate-y-0.5 ${
           isCurrent 
-            ? 'border-teal-500 bg-teal-50/60 shadow-sm' 
-            : 'border-slate-200 hover:border-slate-300 bg-white'
+            ? 'border-sky-500 bg-sky-50/70 shadow-md shadow-sky-500/10' 
+            : 'border-slate-200 hover:border-sky-300 hover:bg-slate-50/80 bg-white'
         }`;
 
         btn.innerHTML = `
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[10px] font-bold ${isCurrent ? 'text-teal-700 bg-teal-100' : 'text-slate-500 bg-slate-100'} px-2 py-0.5 rounded-full">
-              Video ${idx + 1}
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider transition-all duration-200 ${
+              isCurrent 
+                ? 'bg-sky-600 text-white shadow-sm ring-2 ring-sky-300' 
+                : 'bg-slate-100 text-slate-600 border border-slate-200'
+            }">
+              ${isCurrent ? '<span class="w-2 h-2 rounded-full bg-white animate-ping"></span> Sedang Diputar' : `Video ${idx + 1}`}
             </span>
-            <i data-lucide="${isCurrent ? 'play-circle' : 'film'}" class="w-4 h-4 ${isCurrent ? 'text-teal-600' : 'text-slate-400'}"></i>
+            <div class="w-7 h-7 rounded-xl flex items-center justify-center transition-colors ${isCurrent ? 'bg-sky-100 text-sky-600' : 'bg-slate-100 text-slate-400'}">
+              <i data-lucide="${isCurrent ? 'play-circle' : 'film'}" class="w-4 h-4"></i>
+            </div>
           </div>
-          <h4 class="text-xs font-bold text-slate-900 truncate">${vid.judul}</h4>
-          <p class="text-[11px] text-slate-500 line-clamp-2 mt-0.5">${vid.deskripsi}</p>
+          <h4 class="text-xs font-black text-slate-900 truncate leading-snug mt-1">${vid.judul}</h4>
+          <p class="text-[11px] font-medium text-slate-500 line-clamp-2 mt-1 leading-relaxed">${vid.deskripsi}</p>
         `;
 
         btn.onclick = () => putarVideo(idx);
@@ -945,17 +991,31 @@
       document.getElementById("mainVideoIframe").src = embedSrc;
       document.getElementById("mainVideoJudul").innerText = item.judul;
       document.getElementById("mainVideoDeskripsi").innerText = item.deskripsi;
-      document.getElementById("currentVideoTag").innerText = `Sedang Memutar: Video ${idx + 1}`;
+      
+      document.getElementById("currentVideoTag").className = "inline-flex items-center gap-1.5 text-xs font-black text-sky-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-300 shadow-sm";
+      document.getElementById("currentVideoTag").innerHTML = `<span class="w-2 h-2 rounded-full bg-sky-600 animate-ping"></span> Sedang Memutar: Video ${idx + 1}`;
       document.getElementById("btnBukaLinkAsli").href = item.link;
 
-      const container = document.getElementById("videoPlaylistContainer");
-      Array.from(container.children).forEach((el, i) => {
+      dataVideoList.forEach((_, i) => {
+        const el = document.getElementById(`video-card-${i}`);
+        if (!el) return;
         if (i === idx) {
-          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-teal-500 bg-teal-50/60 shadow-sm transition";
+          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-sky-500 bg-sky-50/70 shadow-md shadow-sky-500/10 transition-all duration-200 transform -translate-y-0.5";
+          const badgeSpan = el.querySelector("span");
+          if (badgeSpan) {
+            badgeSpan.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-sky-600 text-white shadow-sm ring-2 ring-sky-300";
+            badgeSpan.innerHTML = '<span class="w-2 h-2 rounded-full bg-white animate-ping"></span> Sedang Diputar';
+          }
         } else {
-          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-slate-200 hover:border-slate-300 bg-white transition";
+          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-slate-200 hover:border-sky-300 hover:bg-slate-50/80 bg-white transition-all duration-200";
+          const badgeSpan = el.querySelector("span");
+          if (badgeSpan) {
+            badgeSpan.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200";
+            badgeSpan.innerHTML = `Video ${i + 1}`;
+          }
         }
       });
+
       lucide.createIcons();
     }
 
@@ -996,7 +1056,7 @@
           </div>
           <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
             <span class="text-xs text-slate-400 font-semibold">${totalSoal} Butir Soal</span>
-            <button onclick="mulaiKuisSpesifik('${namaKuis}')" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl transition">
+            <button onclick="mulaiKuisSpesifik('${namaKuis}')" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl transition shadow-sm">
               Mulai Kerjakan &rarr;
             </button>
           </div>
@@ -1239,7 +1299,107 @@
       }
     }
 
-    // 8. Logika Pengumpulan Tugas
+    // 8. Logika Papan Kanban Dinamis (Membaca Semua Tugas di Tab Daftar_Tugas)
+    function renderKanbanTugas(daftarTugas, tugasTerkumpul) {
+      const colBelum = document.getElementById("kanbanBelumList");
+      const colSelesai = document.getElementById("kanbanSelesaiList");
+      const badgeTotal = document.getElementById("totalTugasBadge");
+
+      if (!colBelum || !colSelesai) return;
+
+      colBelum.innerHTML = "";
+      colSelesai.innerHTML = "";
+
+      if (!daftarTugas || daftarTugas.length === 0) {
+        colBelum.innerHTML = `<div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Belum ada tugas dari guru.</div>`;
+        return;
+      }
+
+      if (badgeTotal) badgeTotal.innerText = `${daftarTugas.length} Tugas`;
+
+      let countBelum = 0;
+      let countSelesai = 0;
+
+      const listTerkumpulUser = (tugasTerkumpul || [])
+        .filter(t => t.nama.toLowerCase().trim() === currentUser.name.toLowerCase().trim())
+        .map(t => t.modul.toLowerCase().trim());
+
+      daftarTugas.forEach(t => {
+        const sudahKumpul = listTerkumpulUser.includes(t.judul.toLowerCase().trim());
+        const deadlineDate = new Date(t.tenggat.toString().replace(" ", "T"));
+        let deadlineLabel = t.tenggat;
+        let isLate = false;
+
+        if (!isNaN(deadlineDate.getTime())) {
+          const now = new Date();
+          isLate = now > deadlineDate;
+          const opsiTgl = { weekday: 'short', day: 'numeric', month: 'short' };
+          const tglStr = deadlineDate.toLocaleDateString('id-ID', opsiTgl);
+          const jamStr = deadlineDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + " WIB";
+          deadlineLabel = `${tglStr}, ${jamStr}`;
+        }
+
+        const card = document.createElement("div");
+        card.className = "bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-2 hover:shadow-md transition";
+
+        if (sudahKumpul) {
+          countSelesai++;
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                ✓ Selesai Dikirim
+              </span>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900 leading-snug">${t.judul}</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">${t.deskripsi}</p>
+            <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-[11px] text-emerald-600 font-bold">
+              <span>Status: Terkumpul</span>
+              <button onclick="switchTab('galeri-tugas')" class="text-xs text-sky-600 hover:underline">Lihat di Galeri &rarr;</button>
+            </div>
+          `;
+          colSelesai.appendChild(card);
+        } else {
+          countBelum++;
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black ${isLate ? 'text-rose-700 bg-rose-50 border-rose-200' : 'text-amber-800 bg-amber-50 border-amber-200'} px-2.5 py-0.5 rounded-full border">
+                ${isLate ? '⚠️ Melewati Batas' : '⏱️ Tenggat: ' + deadlineLabel}
+              </span>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900 leading-snug">${t.judul}</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">${t.deskripsi}</p>
+            <button onclick="pilihDanKumpulkanTugas('${encodeURIComponent(t.judul)}')" class="w-full mt-2 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">
+              <i data-lucide="upload" class="w-3.5 h-3.5"></i> Kumpulkan Tugas
+            </button>
+          `;
+          colBelum.appendChild(card);
+        }
+      });
+
+      document.getElementById("countBelum").innerText = countBelum;
+      document.getElementById("countSelesai").innerText = countSelesai;
+
+      if (countBelum === 0) {
+        colBelum.innerHTML = `<div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Semua tugas sudah diselesaikan! 🎉</div>`;
+      }
+      if (countSelesai === 0) {
+        colSelesai.innerHTML = `<div class="p-6 border-2 border-dashed border-slate-200 rounded-2xl text-center text-xs text-slate-400">Belum ada tugas selesai.</div>`;
+      }
+
+      lucide.createIcons();
+    }
+
+    function pilihDanKumpulkanTugas(encodedJudul) {
+      const judul = decodeURIComponent(encodedJudul);
+      switchTab('pengumpulan');
+      const select = document.getElementById("taskModulSelect");
+      if (select) {
+        select.value = judul;
+        select.dispatchEvent(new Event('change'));
+      }
+    }
+
+    // 9. Logika Pengumpulan Tugas (Format Tenggat Baru)
     function setMetodeTugas(mode) {
       currentUploadMode = mode;
       const btnF = document.getElementById("btnModeFile");
@@ -1403,6 +1563,7 @@
 
         feedback.className = "mt-4 p-3 rounded-xl text-xs font-bold text-center bg-emerald-50 text-emerald-800 border border-emerald-200";
         feedback.innerText = "✅ Tugas berhasil dikirim dan tersimpan di database guru!";
+        loadDataFromSheet(); // Muat ulang data agar Kanban langsung terbarui
       } catch (err) {
         feedback.className = "mt-4 p-3 rounded-xl text-xs font-bold text-center bg-rose-50 text-rose-800 border border-rose-200";
         feedback.innerText = "❌ Gagal mengirim tugas. Periksa koneksi internet Anda.";
@@ -1413,7 +1574,7 @@
       }
     }
 
-    // 9. Logika Galeri Karya & Penilaian Antar-Teman (Tata Letak Memanjang)
+    // 10. Logika Galeri Karya & Penilaian Antar-Teman (Tata Letak Rapi Memanjang)
     function renderGaleriKarya(karyaList) {
       dataKaryaSiswa = karyaList;
       const container = document.getElementById("galeriTugasList");
