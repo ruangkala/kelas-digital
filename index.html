@@ -69,7 +69,7 @@
     <!-- Mobile Backdrop -->
     <div id="mobileMenuBackdrop" onclick="toggleMobileMenu()" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 md:hidden transition-opacity"></div>
 
-    <!-- Sidebar Drawer (Responsive HP & Desktop) -->
+    <!-- Sidebar Drawer -->
     <aside id="mainSidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200/80 flex flex-col shrink-0 transform -translate-x-full md:translate-x-0 md:static md:w-64 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
       <div class="h-20 px-6 flex items-center justify-between border-b border-slate-100">
         <div class="flex items-center gap-3">
@@ -126,7 +126,6 @@
     <main class="flex-1 flex flex-col overflow-y-auto">
       <header class="h-20 bg-white border-b border-slate-200/80 px-4 md:px-6 flex items-center justify-between shrink-0 sticky top-0 z-30">
         <div class="flex items-center gap-3">
-          <!-- Tombol Hamburger Menu HP -->
           <button type="button" onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
@@ -197,86 +196,42 @@
           </div>
         </section>
 
-        <!-- TAB MATERI -->
+        <!-- TAB MATERI (MULTI-BAB DINAMIS) -->
         <section id="tab-materi" class="tab-content hidden space-y-6">
           <div class="p-6 rounded-3xl bg-gradient-to-r from-sky-600 to-teal-600 text-white shadow-lg flex justify-between items-center">
             <div>
               <h2 class="text-xl font-bold">Materi Pembelajaran</h2>
-              <p class="text-xs text-sky-100">Bahasa Indonesia: Teks Anekdot</p>
+              <p class="text-xs text-sky-100">Kumpulan modul dan bahan pembelajaran Bahasa Indonesia</p>
             </div>
-            <span class="text-xs font-bold bg-white/20 px-3 py-1.5 rounded-xl border border-white/20">Modul Tunggal</span>
+            <span class="text-xs font-bold bg-white/20 px-3.5 py-1.5 rounded-xl border border-white/20" id="materiCountBadge">Modul Pembelajaran</span>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="space-y-4">
-              <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Daftar Bab</h3>
-              <div class="bg-white p-4 rounded-2xl border-2 border-teal-500 shadow-sm space-y-2">
-                <span class="text-[10px] font-bold text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full">Sedang Dibaca</span>
-                <h4 class="text-sm font-bold text-slate-900" id="matSideJudul">Bab 1: Teks Anekdot</h4>
-                <p class="text-xs text-slate-500 leading-relaxed" id="matSideDeskripsi">Memahami pengertian, ciri-ciri, struktur, dan kaidah kebahasaan.</p>
+            <!-- Kolom Kiri: Playlist Modul/Bab -->
+            <div class="space-y-3">
+              <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Daftar Bab & Modul</h3>
+              <div id="materiListContainer" class="space-y-2.5 max-h-[500px] overflow-y-auto custom-scroll pr-1">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 text-xs text-slate-400 text-center">
+                  Memuat daftar bab...
+                </div>
               </div>
             </div>
 
+            <!-- Kolom Kanan: Detail Bacaan & Tombol PDF -->
             <div class="lg:col-span-2 bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
                 <div>
-                  <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Membaca Materi</span>
-                  <h3 class="text-xl font-bold text-slate-900 mt-0.5" id="matMainJudul">Konsep & Struktur Teks Anekdot</h3>
+                  <span class="text-xs font-bold text-teal-600 uppercase tracking-wider" id="matActiveBabLabel">Membaca Materi</span>
+                  <h3 class="text-xl font-bold text-slate-900 mt-0.5" id="matMainJudul">Pilih Bab Materi</h3>
                 </div>
-                <a id="btnDownloadPDF" href="#" target="_blank" class="hidden inline-flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl transition">
+                <a id="btnDownloadPDF" href="#" target="_blank" class="hidden inline-flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl transition shadow-sm">
                   <i data-lucide="download" class="w-4 h-4"></i> Unduh PDF Materi
                 </a>
               </div>
 
-              <div class="space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
-                <div class="space-y-2">
-                  <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-teal-500"></span> 1. Pengertian Teks Anekdot
-                  </h4>
-                  <p><strong>Teks anekdot</strong> adalah cerita singkat yang lucu, menarik, dan berkesan, yang biasanya mengangkat kisah tentang tokoh penting atau kejadian sehari-hari, namun di baliknya tersimpan kritik sosial atau pesan moral.</p>
-                  <div class="bg-teal-50 border border-teal-200 rounded-xl p-3 text-teal-900 text-xs">
-                    <strong>Perbedaan dengan humor biasa:</strong> Humor murni hanya bertujuan menghibur, sedangkan anekdot selalu menyelipkan kritik atau sindiran halus terhadap fenomena sosial atau kebijakan.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-teal-500"></span> 2. Ciri-Ciri Teks Anekdot
-                  </h4>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                    <div class="p-3 bg-slate-50 border rounded-xl"><strong>😄 Menghibur:</strong> Dialog konyol atau situasi menggelitik.</div>
-                    <div class="p-3 bg-slate-50 border rounded-xl"><strong>🎯 Menyindir:</strong> Mengkritik fenomena secara santun.</div>
-                    <div class="p-3 bg-slate-50 border rounded-xl"><strong>💡 Menggelitik Pikiran:</strong> Mengajak pembaca merenung.</div>
-                    <div class="p-3 bg-slate-50 border rounded-xl"><strong>📖 Cerita Nyata/Rekaan:</strong> Pengalaman nyata atau tokoh rekaan.</div>
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-teal-500"></span> 3. Struktur Teks Anekdot
-                  </h4>
-                  <ol class="space-y-2 border-l-2 border-teal-500 pl-4 text-xs">
-                    <li><strong>1. Abstrak (Opsional):</strong> Gambaran awal isi cerita.</li>
-                    <li><strong>2. Orientasi:</strong> Pengenalan tokoh, latar belakang, dan situasi.</li>
-                    <li><strong>3. Krisis:</strong> Puncak konflik atau kejanggalan yang dialami tokoh.</li>
-                    <li><strong>4. Reaksi:</strong> Tanggapan tokoh dalam merespons krisis (menghadirkan tawa).</li>
-                    <li><strong>5. Koda (Opsional):</strong> Penutup berupa simpulan atau pesan moral.</li>
-                  </ol>
-                </div>
-
-                <div class="space-y-3">
-                  <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-teal-500"></span> 4. Kaidah Kebahasaan
-                  </h4>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                    <div class="p-2.5 bg-white border rounded-xl"><strong>Kalimat Masa Lalu:</strong> Kejadian lampau.</div>
-                    <div class="p-2.5 bg-white border rounded-xl"><strong>Kalimat Langsung:</strong> Dialog kutipan percakapan.</div>
-                    <div class="p-2.5 bg-white border rounded-xl"><strong>Konjungsi Temporal:</strong> Urutan waktu (lalu, kemudian).</div>
-                    <div class="p-2.5 bg-white border rounded-xl"><strong>Kata Kerja Aksi:</strong> Perbuatan fisik (menulis, tertawa).</div>
-                    <div class="p-2.5 bg-white border rounded-xl"><strong>Kalimat Retoris:</strong> Pertanyaan sindiran tanpa jawaban.</div>
-                    <div class="p-2.5 bg-white border rounded-xl"><strong>Majas Sindiran:</strong> Ironi, sinisme, atau sarkasme.</div>
-                  </div>
-                </div>
+              <!-- Wadah Konten Materi -->
+              <div id="materiContentBox" class="space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <p class="text-slate-400">Silakan pilih bab materi di sebelah kiri untuk mulai membaca.</p>
               </div>
             </div>
           </div>
@@ -626,6 +581,10 @@
 
     let currentUser = { name: "Ahmad Fauzi", absen: "05", kelas: "Kelas XI" };
     
+    // Variabel Multi-Materi
+    let dataMateriList = [];
+    let materiIndexAktif = 0;
+
     // Variabel Multi-Kuis & Timer
     let semuaSoalDariSheet = [];
     let daftarKuisAktif = {};
@@ -704,7 +663,6 @@
         activeNav.classList.remove("text-slate-600");
       }
 
-      // Otomatis tutup drawer di layar HP setelah memilih tab
       const sidebar = document.getElementById("mainSidebar");
       const backdrop = document.getElementById("mobileMenuBackdrop");
       if (sidebar && !sidebar.classList.contains("-translate-x-full") && window.innerWidth < 768) {
@@ -713,7 +671,7 @@
       }
     }
 
-    // 3. Absensi Real-time (Hari, Tanggal & Jam Lengkap)
+    // 3. Absensi Real-time
     async function lakukanAbsen() {
       const btn = document.getElementById("btnActionAbsen");
       btn.disabled = true;
@@ -759,13 +717,29 @@
       }
     }
 
-    // 4. Memuat Seluruh Data dari Google Sheets
+    // 4. Memuat Data dari Google Sheets
     async function loadDataFromSheet() {
       try {
         const res = await fetch(SCRIPT_URL);
         const data = await res.json();
 
-        // A. Load Soal Multi-Kuis
+        // A. Load Multi-Materi
+        if (data.materi && data.materi.length > 0) {
+          renderMateriList(data.materi);
+        } else {
+          renderMateriList([
+            {
+              id: 1,
+              bab: "Bab 1: Teks Anekdot",
+              judul: "Konsep & Struktur Teks Anekdot",
+              deskripsi: "Memahami pengertian, ciri-ciri, struktur, dan kaidah kebahasaan.",
+              link_pdf: "",
+              isi: "<p>Teks anekdot adalah cerita singkat yang lucu, menarik, dan berkesan yang menyimpan kritik sosial.</p>"
+            }
+          ]);
+        }
+
+        // B. Load Soal Multi-Kuis
         if (data.soal && data.soal.length > 0) {
           semuaSoalDariSheet = data.soal;
           kelompokkanKuis();
@@ -775,19 +749,6 @@
             { id: 2, kuis: "Kuis Teks Anekdot", pertanyaan: "Bagian struktur yang memuat puncak konflik atau kejanggalan adalah...", opsi: { A: "Orientasi", B: "Krisis", C: "Koda", D: "Abstrak" }, kunci: "B" }
           ];
           kelompokkanKuis();
-        }
-
-        // B. Load Materi
-        if (data.materi && data.materi.length > 0) {
-          const m = data.materi[0];
-          document.getElementById("matSideJudul").innerText = m.bab;
-          document.getElementById("matSideDeskripsi").innerText = m.deskripsi;
-          document.getElementById("matMainJudul").innerText = m.judul;
-          if (m.link_pdf) {
-            const btn = document.getElementById("btnDownloadPDF");
-            btn.href = m.link_pdf;
-            btn.classList.remove("hidden");
-          }
         }
 
         // C. Load Playlist Video
@@ -821,7 +782,88 @@
       }
     }
 
-    // 5. Logika Multi-Video Player (YouTube, TikTok, Drive)
+    // 5. Logika Multi-Materi (Daftar Bab & Detail Bacaan)
+    function renderMateriList(list) {
+      dataMateriList = list;
+      const container = document.getElementById("materiListContainer");
+      const badge = document.getElementById("materiCountBadge");
+      if (!container) return;
+
+      if (!list || list.length === 0) {
+        container.innerHTML = `<div class="p-4 bg-slate-50 rounded-2xl text-xs text-slate-400 text-center">Belum ada materi di spreadsheet.</div>`;
+        return;
+      }
+
+      badge.innerText = `${list.length} Modul Tersedia`;
+      container.innerHTML = "";
+
+      list.forEach((m, idx) => {
+        const isCurrent = idx === materiIndexAktif;
+        const card = document.createElement("div");
+        card.className = `p-4 rounded-2xl cursor-pointer border-2 transition ${
+          isCurrent 
+            ? 'border-teal-500 bg-teal-50/60 shadow-sm' 
+            : 'border-slate-200 hover:border-slate-300 bg-white'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] font-bold ${isCurrent ? 'text-teal-700 bg-teal-100' : 'text-slate-500 bg-slate-100'} px-2.5 py-0.5 rounded-full">
+              ${isCurrent ? 'Sedang Dibaca' : 'Bab ' + (idx + 1)}
+            </span>
+            <i data-lucide="${isCurrent ? 'book-open' : 'book'}" class="w-4 h-4 ${isCurrent ? 'text-teal-600' : 'text-slate-400'}"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900 truncate">${m.bab}</h4>
+          <p class="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">${m.deskripsi}</p>
+        `;
+
+        card.onclick = () => bukaMateri(idx);
+        container.appendChild(card);
+      });
+
+      bukaMateri(materiIndexAktif);
+      lucide.createIcons();
+    }
+
+    function bukaMateri(idx) {
+      if (!dataMateriList[idx]) return;
+      materiIndexAktif = idx;
+      const item = dataMateriList[idx];
+
+      document.getElementById("matActiveBabLabel").innerText = item.bab;
+      document.getElementById("matMainJudul").innerText = item.judul;
+
+      const btnPdf = document.getElementById("btnDownloadPDF");
+      if (item.link_pdf && item.link_pdf.trim() !== "") {
+        btnPdf.href = item.link_pdf;
+        btnPdf.classList.remove("hidden");
+      } else {
+        btnPdf.classList.add("hidden");
+      }
+
+      const contentBox = document.getElementById("materiContentBox");
+      contentBox.innerHTML = `
+        <div class="bg-teal-50 border border-teal-200 rounded-2xl p-4 text-teal-900 text-xs sm:text-sm">
+          <strong>Ringkasan:</strong> ${item.deskripsi}
+        </div>
+        <div class="space-y-4 pt-2">
+          ${item.isi || '<p class="text-slate-500">Silakan baca dokumen lengkap materi ini melalui tautan PDF di atas.</p>'}
+        </div>
+      `;
+
+      const container = document.getElementById("materiListContainer");
+      Array.from(container.children).forEach((el, i) => {
+        if (i === idx) {
+          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-teal-500 bg-teal-50/60 shadow-sm transition";
+        } else {
+          el.className = "p-4 rounded-2xl cursor-pointer border-2 border-slate-200 hover:border-slate-300 bg-white transition";
+        }
+      });
+
+      lucide.createIcons();
+    }
+
+    // 6. Logika Multi-Video Player
     function formatEmbedUrl(rawUrl) {
       if (!rawUrl) return "";
       let url = rawUrl.trim();
@@ -917,7 +959,7 @@
       lucide.createIcons();
     }
 
-    // 6. Logika Multi-Kuis, Shapes Nomor & Timer Countdown
+    // 7. Logika Multi-Kuis, Shapes Nomor & Timer Countdown
     function kelompokkanKuis() {
       daftarKuisAktif = {};
       semuaSoalDariSheet.forEach(item => {
@@ -1197,7 +1239,7 @@
       }
     }
 
-    // 7. Logika Pengumpulan Tugas (Format Tenggat Waktu Baru)
+    // 8. Logika Pengumpulan Tugas
     function setMetodeTugas(mode) {
       currentUploadMode = mode;
       const btnF = document.getElementById("btnModeFile");
@@ -1371,7 +1413,7 @@
       }
     }
 
-    // 8. Logika Galeri Karya & Penilaian Antar-Teman (Tata Letak Memanjang)
+    // 9. Logika Galeri Karya & Penilaian Antar-Teman (Tata Letak Memanjang)
     function renderGaleriKarya(karyaList) {
       dataKaryaSiswa = karyaList;
       const container = document.getElementById("galeriTugasList");
